@@ -11,4 +11,28 @@ stack7 = ['B', 'J', 'R', 'P', 'L']
 stack8 = ['N', 'C', 'S', 'L', 'T', 'Z', 'B', 'W']
 stack9 = ['L', 'S', 'G']
 
+stacks = [stack1, stack2, stack3, stack4,
+          stack5, stack6, stack7, stack8, stack9]
+lines = lines[10:]
 
+for line in lines:
+    num_of_crates, places = line.split(" from ")
+    num_of_crates = int(num_of_crates[5:])
+    start, end = places.split(" to ")
+
+    start = int(start)
+    end = int(end)
+
+    last_crates = stacks[start-1][-1*(num_of_crates):]
+    stacks[end-1].extend(last_crates)
+    
+    print(stacks[start-1])
+    for i in range(num_of_crates):
+        stacks[start-1].pop()
+
+crates_at_top = ''
+
+for stack in stacks:
+    crates_at_top += stack.pop()
+
+print(crates_at_top)
